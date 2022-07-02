@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import images from "./api-mock.json";
 
 function App() {
-  return <div>Hello React!</div>;
+  const [imageList, setImageList] = useState(images.resources);
+  return (
+    <div className="image-grid">
+      {imageList.map((image) => (
+        <img src={image.url} alt={image.public_id}></img>
+      ))}
+    </div>
+  );
 }
 
 export default App;
