@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
-import images from "./api-mock.json";
+import { getImages } from "./api";
 
 function App() {
-  const [imageList, setImageList] = useState(images.resources);
+  const [imageList, setImageList] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const responseJson = await getImages();
+      setImageList(responseJson.resources);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="image-grid">
       {imageList.map((image) => (
